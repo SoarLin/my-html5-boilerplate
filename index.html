@@ -121,11 +121,11 @@ $(window).load(function(){
             queue: false
         }
     });
- 
+
     $('.portfolioFilter a').click(function(){
         $('.portfolioFilter .current').removeClass('current');
         $(this).addClass('current');
- 
+
         var selector = $(this).attr('data-filter');
         $container.isotope({
             filter: selector,
@@ -136,7 +136,17 @@ $(window).load(function(){
             }
          });
          return false;
-    }); 
+    });
+
+    $('#container').isotope({
+        filter: '*',
+        animationOptions: {
+            duration: 750,
+            easing: 'linear',
+            queue: false
+        },
+        layoutMode: 'fitRows',
+     });
 });
 
 $("#choiceContainer a").click(function(){
