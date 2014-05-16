@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>Learning About Backbone.js Models</title>
+</head>
+<body>
+
+<script src="../js/vendor/underscore-min.js"></script>
+<script src="../js/vendor/backbone-min.js"></script>
+<script type="text/javascript">
+    Person = Backbone.Model.extend({
+        initialize: function(){
+            console.log('hello world!!!');
+            this.bind("change:name", function(){
+                console.log(this.get('name') + " is now the value for name");
+            });
+            this.bind('invalid', function( model, error) {
+                console.log(error);
+            });
+        },
+        defaults: {
+            name: "Bob Hope",
+            height: "unknow"
+        },
+        validate: function( attributes ){
+            if( attributes.name == 'Joe') {
+                return "Uh oh, You're name is Joe!";
+            } else {
+                return "haha, You're not Joe!";
+            }
+        }
+    });
+
+    var person = new Person();
+    person.set({name:'Joe', height:'6 feet'}, {validate:true});
+    // person.validate();
+    console.log(person.toJSON());
+
+</script>
+</body>
+</html>
