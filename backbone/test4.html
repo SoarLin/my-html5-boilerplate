@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>Learning About Backbone.js Collections</title>
+</head>
+<body>
+
+<script src="../js/vendor/jquery-1.10.1.min.js"></script>
+<!-- <script src="//code.jquery.com/jquery-1.11.0.min.js"></script> -->
+<script src="../js/vendor/underscore-min.js"></script>
+<script src="../js/vendor/backbone-min.js"></script>
+<script>
+
+  var Person = Backbone.Model.extend({
+      initialize: function(){
+          console.log('Pesrson is initialize.');
+          this.bind('change:name', function(){
+              console.log(this.get('name') + " is now the value for name");
+          });
+      },
+      defaults: {
+          name: "undefined",
+          age: "undefined"
+      },
+  });
+
+  var People = Backbone.Collection.extend({
+        initialize: function(){
+            console.log("People Collection is initialized");
+        },
+        model: Person
+  });
+
+  var person = new Person({name:"Joe"});
+
+  var people = new People(person);
+  people.add([{name:"Bob"}, {name: "Jim"}]);
+
+  // people.remove(person);
+  // people.reset([{name:"Bob"}, {name: "Jim"}, person]);
+  // console.log(people.get({cid:'c1'}));
+  console.log(people.pluck('name'));
+  console.log(people.where({name:'Joe'}));
+
+  console.log(people.models);
+
+</script>
+
+</body>
+</html>

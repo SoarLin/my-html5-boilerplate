@@ -6,12 +6,31 @@
 </head>
 <body>
 
-<script src="../js/vendor/jquery-1.10.1.min.js"></script>
+<!-- <script src="../js/vendor/jquery-1.10.1.min.js"></script> -->
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="../js/vendor/underscore-min.js"></script>
 <script src="../js/vendor/backbone-min.js"></script>
 <script>
 
+  var Router = Backbone.Router.extend({
+    routes: {
+      "foo/:bar" : "paramtest",
+      "*action" : "func"
+    },
+    func: function (action) {
+        console.log("func, " + action);
+    },
+    paramtest: function(p){
+        console.log("paramtest, " + p);
+    }
+  });
+
+  new Router();
+
+  Backbone.history.start();
 
 </script>
+
+<a href="#foo/bar">Foo</a>
 </body>
 </html>
